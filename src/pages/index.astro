@@ -1,0 +1,878 @@
+---
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>💝 ¿Quieres ser mi San Valentín? 💝</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="hearts-background"></div>
+		
+		<div class="container">
+			<h1 class="pixel-title">💝 San Valentín 2026 💝</h1>
+			
+			<!-- Contador de días -->
+			<div class="countdown-box">
+				<div class="countdown-label">⏰ Días para el 14 de Febrero</div>
+				<div class="countdown-number" id="countdown">--</div>
+			</div>
+
+			<!-- Calendario -->
+			<div class="calendar-container">
+				<div class="calendar-header">📅 Febrero 2026 📅</div>
+				<div class="calendar">
+					<div class="calendar-days-header">
+						<div class="day-header">Dom</div>
+						<div class="day-header">Lun</div>
+						<div class="day-header">Mar</div>
+						<div class="day-header">Mié</div>
+						<div class="day-header">Jue</div>
+						<div class="day-header">Vie</div>
+						<div class="day-header">Sáb</div>
+					</div>
+					<div class="calendar-days">
+						<div class="day">1</div>
+						<div class="day">2</div>
+						<div class="day">3</div>
+						<div class="day">4</div>
+						<div class="day">5</div>
+						<div class="day">6</div>
+						<div class="day">7</div>
+						<div class="day">8</div>
+						<div class="day">9</div>
+						<div class="day">10</div>
+						<div class="day">11</div>
+						<div class="day">12</div>
+						<div class="day">13</div>
+						<div class="day valentine-day">14 💝</div>
+						<div class="day">15</div>
+						<div class="day">16</div>
+						<div class="day">17</div>
+						<div class="day">18</div>
+						<div class="day">19</div>
+						<div class="day">20</div>
+						<div class="day">21</div>
+						<div class="day">22</div>
+						<div class="day">23</div>
+						<div class="day">24</div>
+						<div class="day">25</div>
+						<div class="day">26</div>
+						<div class="day">27</div>
+						<div class="day">28</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Sección de foto -->
+			<div class="photo-frame">
+			<img src="/juntos.jpeg" alt="Nuestra foto" class="couple-photo" />
+			<div class="photo-placeholder">
+				<span>📸</span>
+				<p>Coloca tu foto aquí<br/>(public/juntos.jpeg)</p>
+			</div>
+		</div>
+
+			<!-- Pregunta principal -->
+			<div class="question-box">
+				<h2 class="question">Mi vida hermosa y preciosa, te amo tanto... </h2>
+				<p class="question-subtitle">¿Te casarías conmigo, por favor?</p>
+				<p class="question-extra">Mientras tanto... ¿te gustaría ser mi San Valentín? 😊❤️</p>
+			</div>
+
+			<!-- Botones -->
+			<div class="buttons-container">
+				<button id="yes-btn" class="btn btn-yes">
+					✨ ¡SÍ! ✨
+				</button>
+				<button id="no-btn" class="btn btn-no">
+					No...
+				</button>
+			</div>
+
+			<!-- Mensaje de éxito (oculto inicialmente) -->
+			<div id="success-message" class="success-message hidden">
+				<h2>🎉 ¡Sabía que dirías que sí! 🎉</h2>
+				<p>¡jijijiji te quelo muchisimo! </p>
+				<div class="pixel-heart">❤️</div>
+			</div>
+
+			<!-- Sección del regalo -->
+			<div class="gift-section">
+				<h3 class="gift-title">🎁 Tengo algo para ti 🎁</h3>
+				<button id="gift-btn" class="gift-box">
+					<span class="gift-emoji">🎁</span>
+					<span class="gift-text">¡Click aquí!</span>
+				</button>
+			</div>
+
+			<!-- Modal del regalo -->
+			<div id="gift-modal" class="modal hidden">
+				<div class="modal-content">
+					<button id="close-modal" class="close-btn">✕</button>
+					<h3 class="modal-title">🎁 Tu Regalo Especial 🎁</h3>
+					<div class="gift-image-container">
+					<img src="/gift.PNG" alt="Tu regalo" class="gift-image" />
+					
+				</div>
+				<p class="gift-message">¡Espero que te guste! 💝</p>
+			</div>
+		</div>
+		</div>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Press Start 2P', cursive;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #feca57 100%);
+				background-size: 400% 400%;
+				animation: gradientShift 15s ease infinite;
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				overflow-x: hidden;
+			}
+
+			@keyframes gradientShift {
+				0% { background-position: 0% 50%; }
+				50% { background-position: 100% 50%; }
+				100% { background-position: 0% 50%; }
+			}
+
+			.hearts-background {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+				z-index: 1;
+			}
+
+			.hearts-background::before,
+			.hearts-background::after {
+				content: '💕 💖 💝 ❤️ 💗 💓 💞';
+				position: absolute;
+				font-size: 30px;
+				white-space: nowrap;
+				animation: floatHearts 20s linear infinite;
+				opacity: 0.3;
+			}
+
+			.hearts-background::before {
+				top: 10%;
+				animation-delay: 0s;
+			}
+
+			.hearts-background::after {
+				top: 60%;
+				animation-delay: -10s;
+			}
+
+			@keyframes floatHearts {
+				from { transform: translateX(-100%); }
+				to { transform: translateX(100vw); }
+			}
+
+			.container {
+				position: relative;
+				z-index: 2;
+				background: rgba(255, 255, 255, 0.95);
+				border: 8px solid #333;
+				border-radius: 20px;
+				padding: 40px;
+				max-width: 600px;
+				width: 90%;
+				box-shadow: 
+					0 0 0 4px #fff,
+					0 0 0 8px #333,
+					0 20px 60px rgba(0, 0, 0, 0.5),
+					inset 0 0 50px rgba(255, 182, 193, 0.3);
+				text-align: center;
+			}
+
+			.pixel-title {
+				font-size: clamp(16px, 4vw, 24px);
+				color: #e91e63;
+				text-shadow: 
+					4px 4px 0 #ffc0cb,
+					-2px -2px 0 #ff1744,
+					0 0 20px rgba(255, 105, 180, 0.5);
+				margin-bottom: 30px;
+				animation: bounce 2s ease-in-out infinite;
+			}
+
+			@keyframes bounce {
+				0%, 100% { transform: translateY(0); }
+				50% { transform: translateY(-10px); }
+			}
+
+			.photo-frame {
+				width: 250px;
+				height: 250px;
+				margin: 0 auto 30px;
+				border: 8px solid #ff1744;
+				border-radius: 15px;
+				box-shadow: 
+					0 0 0 4px #ffc0cb,
+					0 0 0 8px #333,
+					0 10px 30px rgba(0, 0, 0, 0.3);
+				position: relative;
+				overflow: hidden;
+				background: linear-gradient(135deg, #ffc0cb 0%, #ffb6c1 100%);
+			}
+
+			.couple-photo {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+
+			.photo-placeholder {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				background: linear-gradient(135deg, #ffc0cb 0%, #ffb6c1 50%, #ff69b4 100%);
+				color: #fff;
+				font-size: 12px;
+				text-align: center;
+				padding: 20px;
+			}
+
+			.photo-placeholder span {
+				font-size: 60px;
+				margin-bottom: 10px;
+			}
+
+			.photo-placeholder p {
+				line-height: 1.6;
+			}
+
+			.couple-photo[src="/juntos.jpeg"] ~ .photo-placeholder {
+				display: none;
+			}
+
+			/* Countdown */
+			.countdown-box {
+				background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+				border: 6px solid #333;
+				border-radius: 15px;
+				padding: 20px;
+				margin-bottom: 25px;
+				box-shadow: 
+					0 0 0 3px #fff,
+					0 0 0 6px #333,
+					0 8px 20px rgba(0, 0, 0, 0.3);
+				text-align: center;
+			}
+
+			.countdown-label {
+				font-size: clamp(10px, 2vw, 12px);
+				color: #333;
+				text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+				margin-bottom: 10px;
+			}
+
+			.countdown-number {
+				font-size: clamp(40px, 8vw, 60px);
+				color: #fff;
+				text-shadow: 4px 4px 0 #333;
+				font-weight: bold;
+				animation: pulse 2s ease-in-out infinite;
+			}
+
+			@keyframes pulse {
+				0%, 100% { transform: scale(1); }
+				50% { transform: scale(1.1); }
+			}
+
+			/* Calendar */
+			.calendar-container {
+				margin-bottom: 30px;
+				background: rgba(255, 255, 255, 0.9);
+				border: 6px solid #333;
+				border-radius: 15px;
+				padding: 20px;
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+			}
+
+			.calendar-header {
+				font-size: clamp(12px, 2.5vw, 16px);
+				color: #e91e63;
+				text-align: center;
+				margin-bottom: 15px;
+				text-shadow: 2px 2px 0 #ffc0cb;
+			}
+
+			.calendar {
+				background: #fff;
+				border: 4px solid #ff69b4;
+				border-radius: 10px;
+				padding: 15px;
+				box-shadow: inset 0 0 20px rgba(255, 182, 193, 0.3);
+			}
+
+			.calendar-days-header {
+				display: grid;
+				grid-template-columns: repeat(7, 1fr);
+				gap: 8px;
+				margin-bottom: 10px;
+			}
+
+			.day-header {
+				font-size: clamp(8px, 1.5vw, 10px);
+				color: #e91e63;
+				text-align: center;
+				font-weight: bold;
+				padding: 5px;
+				background: rgba(255, 182, 193, 0.3);
+				border-radius: 5px;
+			}
+
+			.calendar-days {
+				display: grid;
+				grid-template-columns: repeat(7, 1fr);
+				gap: 8px;
+			}
+
+			.day {
+				font-size: clamp(10px, 2vw, 14px);
+				text-align: center;
+				padding: 10px 5px;
+				background: #f0f0f0;
+				border: 2px solid #ddd;
+				border-radius: 8px;
+				color: #333;
+				transition: all 0.2s;
+			}
+
+			.day:hover {
+				transform: scale(1.05);
+				background: #fff;
+			}
+
+			.valentine-day {
+				background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+				color: #fff;
+				border: 3px solid #333;
+				font-weight: bold;
+				box-shadow: 
+					0 0 0 2px #ffd700,
+					0 0 20px rgba(255, 23, 68, 0.6),
+					0 4px 10px rgba(0, 0, 0, 0.3);
+				animation: valentineGlow 2s ease-in-out infinite;
+				transform: scale(1.1);
+			}
+
+			@keyframes valentineGlow {
+				0%, 100% { 
+					box-shadow: 
+						0 0 0 2px #ffd700,
+						0 0 20px rgba(255, 23, 68, 0.6),
+						0 4px 10px rgba(0, 0, 0, 0.3);
+				}
+				50% { 
+					box-shadow: 
+						0 0 0 2px #fff,
+						0 0 30px rgba(255, 23, 68, 0.9),
+						0 4px 20px rgba(255, 215, 0, 0.5);
+				}
+			}
+
+			.question-box {
+				background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+				border: 4px solid #333;
+				border-radius: 10px;
+				padding: 25px;
+				margin-bottom: 30px;
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+			}
+
+			.question {
+				font-size: clamp(14px, 3vw, 18px);
+				color: #fff;
+				text-shadow: 3px 3px 0 #333;
+				line-height: 1.6;
+				margin-bottom: 15px;
+			}
+
+			.question-subtitle {
+				font-size: clamp(12px, 2.5vw, 16px);
+				color: #fff;
+				text-shadow: 2px 2px 0 #333;
+				margin: 15px 0;
+				line-height: 1.8;
+			}
+
+			.question-extra {
+				font-size: clamp(10px, 2vw, 14px);
+				color: #fff;
+				text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+				margin-top: 15px;
+				line-height: 1.8;
+				opacity: 0.95;
+			}
+
+			.buttons-container {
+				display: flex;
+				gap: 20px;
+				justify-content: center;
+				margin-bottom: 40px;
+				flex-wrap: wrap;
+				min-height: 80px;
+				align-items: center;
+			}
+
+			.btn {
+				font-family: 'Press Start 2P', cursive;
+				font-size: clamp(12px, 2.5vw, 16px);
+				padding: 20px 40px;
+				border: 4px solid #333;
+				border-radius: 10px;
+				cursor: pointer;
+				transition: transform 0.1s, box-shadow 0.1s;
+				box-shadow: 0 6px 0 #333, 0 10px 20px rgba(0, 0, 0, 0.3);
+				position: relative;
+			}
+
+			.btn:active {
+				transform: translateY(4px);
+				box-shadow: 0 2px 0 #333, 0 4px 10px rgba(0, 0, 0, 0.3);
+			}
+
+			.btn-yes {
+				background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+				color: #fff;
+				text-shadow: 2px 2px 0 #166534;
+			}
+
+			.btn-yes:hover {
+				background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+				transform: scale(1.1);
+			}
+
+			.btn-no {
+				background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+				color: #fff;
+				text-shadow: 2px 2px 0 #7f1d1d;
+				position: absolute;
+			}
+
+			.success-message {
+				background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+				border: 4px solid #333;
+				border-radius: 15px;
+				padding: 30px;
+				margin-bottom: 30px;
+				animation: celebration 0.5s ease-in-out;
+			}
+
+			.success-message h2 {
+				font-size: clamp(14px, 3vw, 20px);
+				color: #fff;
+				text-shadow: 3px 3px 0 #166534;
+				margin-bottom: 15px;
+			}
+
+			.success-message p {
+				font-size: clamp(10px, 2vw, 14px);
+				color: #fff;
+				text-shadow: 2px 2px 0 #166534;
+			}
+
+			.pixel-heart {
+				font-size: 50px;
+				margin-top: 15px;
+				animation: heartbeat 1s ease-in-out infinite;
+			}
+
+			@keyframes celebration {
+				0%, 100% { transform: rotate(0deg) scale(1); }
+				25% { transform: rotate(-5deg) scale(1.05); }
+				75% { transform: rotate(5deg) scale(1.05); }
+			}
+
+			@keyframes heartbeat {
+				0%, 100% { transform: scale(1); }
+				50% { transform: scale(1.2); }
+			}
+
+			.gift-section {
+				margin-top: 40px;
+				padding-top: 30px;
+				border-top: 4px dashed #e91e63;
+			}
+
+			.gift-title {
+				font-size: clamp(12px, 2.5vw, 16px);
+				color: #e91e63;
+				margin-bottom: 20px;
+				text-shadow: 2px 2px 0 #ffc0cb;
+			}
+
+			.gift-box {
+				font-family: 'Press Start 2P', cursive;
+				background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+				border: 4px solid #333;
+				border-radius: 15px;
+				padding: 30px 50px;
+				font-size: clamp(14px, 3vw, 18px);
+				cursor: pointer;
+				box-shadow: 0 8px 0 #b8860b, 0 12px 20px rgba(0, 0, 0, 0.3);
+				transition: all 0.1s;
+				animation: giftSway 2s ease-in-out infinite;
+			}
+
+			.gift-box:hover {
+				transform: scale(1.1) translateY(-5px);
+			}
+
+			.gift-box:active {
+				transform: translateY(6px);
+				box-shadow: 0 2px 0 #b8860b, 0 4px 10px rgba(0, 0, 0, 0.3);
+			}
+
+			@keyframes giftSway {
+				0%, 100% { transform: rotate(-2deg); }
+				50% { transform: rotate(2deg); }
+			}
+
+			.gift-emoji {
+				font-size: 40px;
+				display: block;
+				margin-bottom: 10px;
+			}
+
+			.gift-text {
+				color: #333;
+				text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
+			}
+
+			.modal {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.8);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+				padding: 20px;
+			}
+
+			.modal-content {
+				background: #fff;
+				border: 8px solid #333;
+				border-radius: 20px;
+				padding: 40px;
+				max-width: 500px;
+				width: 90%;
+				position: relative;
+				box-shadow: 
+					0 0 0 4px #ffd700,
+					0 0 0 8px #333,
+					0 20px 60px rgba(0, 0, 0, 0.7);
+				animation: modalAppear 0.3s ease-out;
+			}
+
+			@keyframes modalAppear {
+				from {
+					transform: scale(0.5) rotate(-10deg);
+					opacity: 0;
+				}
+				to {
+					transform: scale(1) rotate(0deg);
+					opacity: 1;
+				}
+			}
+
+			.close-btn {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				background: #ef4444;
+				color: #fff;
+				border: 3px solid #333;
+				border-radius: 50%;
+				width: 40px;
+				height: 40px;
+				font-size: 20px;
+				cursor: pointer;
+				font-family: 'Press Start 2P', cursive;
+				box-shadow: 0 4px 0 #7f1d1d;
+				transition: all 0.1s;
+			}
+
+			.close-btn:hover {
+				transform: scale(1.1);
+			}
+
+			.close-btn:active {
+				transform: translateY(3px);
+				box-shadow: 0 1px 0 #7f1d1d;
+			}
+
+			.modal-title {
+				font-size: clamp(14px, 3vw, 18px);
+				color: #e91e63;
+				margin-bottom: 25px;
+				text-shadow: 2px 2px 0 #ffc0cb;
+			}
+
+			.gift-image-container {
+				width: 100%;
+			max-width: 500px;
+			min-height: 350px;
+			max-height: 500px;
+			margin: 0 auto 25px;
+			border: 6px solid #ffd700;
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 
+				0 0 0 3px #333,
+				0 10px 30px rgba(0, 0, 0, 0.3);
+			position: relative;
+			background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.gift-image {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+
+			.gift-placeholder {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffa500 100%);
+				color: #333;
+				font-size: 10px;
+				text-align: center;
+				padding: 15px;
+			}
+
+			.gift-placeholder span {
+				font-size: 80px;
+				margin-bottom: 15px;
+				animation: giftBounce 1s ease-in-out infinite;
+			}
+
+			@keyframes giftBounce {
+				0%, 100% { transform: translateY(0) rotate(0deg); }
+				25% { transform: translateY(-10px) rotate(-5deg); }
+				75% { transform: translateY(-10px) rotate(5deg); }
+			}
+
+			.gift-placeholder p {
+				line-height: 1.6;
+			}
+
+			.gift-image:not([src=""]):not([src*="gift.jpg"]) ~ .gift-placeholder,
+			.gift-image[src*="gift.jpg"]:not([src="/gift.jpg"]) ~ .gift-placeholder {
+				display: none;
+			}
+
+			.gift-message {
+				font-size: clamp(10px, 2vw, 14px);
+				color: #e91e63;
+				text-shadow: 1px 1px 0 #ffc0cb;
+				line-height: 1.6;
+			}
+
+			.hidden {
+				display: none !important;
+			}
+
+			@media (max-width: 600px) {
+				.container {
+					padding: 20px;
+				}
+
+				.photo-frame {
+					width: 200px;
+					height: 200px;
+				}
+
+				.btn {
+					padding: 15px 30px;
+				}
+
+				.gift-box {
+					padding: 20px 30px;
+				}
+
+				.modal-content {
+					padding: 25px;
+				}
+			}
+		</style>
+
+		<script>
+		const noBtn = document.getElementById('no-btn') as HTMLButtonElement;
+		const yesBtn = document.getElementById('yes-btn') as HTMLButtonElement;
+		const successMessage = document.getElementById('success-message') as HTMLElement;
+		const giftBtn = document.getElementById('gift-btn') as HTMLButtonElement;
+		const giftModal = document.getElementById('gift-modal') as HTMLElement;
+		const closeModal = document.getElementById('close-modal') as HTMLButtonElement;
+		const buttonsContainer = document.querySelector('.buttons-container') as HTMLElement;
+		const countdownElement = document.getElementById('countdown') as HTMLElement;
+
+		// Función para calcular días hasta el 14 de febrero
+		function updateCountdown() {
+			const today = new Date();
+			const currentYear = today.getFullYear();
+			let valentineDay = new Date(currentYear, 1, 14); // Mes 1 = febrero (0-indexed)
+			
+			// Si ya pasó el 14 de febrero de este año, calcular para el próximo año
+			if (today > valentineDay) {
+				valentineDay = new Date(currentYear + 1, 1, 14);
+			}
+			
+			// Calcular diferencia en milisegundos
+			const diffTime = valentineDay.getTime() - today.getTime();
+			const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+			
+			countdownElement.textContent = diffDays.toString();
+			
+			// Si es el mismo día
+			if (diffDays === 0) {
+				countdownElement.textContent = '¡HOY! 💝';
+			}
+		}
+
+		// Actualizar contador al cargar
+		updateCountdown();
+		
+		// Actualizar cada minuto
+		setInterval(updateCountdown, 60000);
+
+		// Función para mover el botón "No" cuando el mouse se acerca
+		function moveNoButton(e: MouseEvent) {
+			const rect = noBtn.getBoundingClientRect();
+			const btnCenterX = rect.left + rect.width / 2;
+			const btnCenterY = rect.top + rect.height / 2;
+			
+			const distance = Math.sqrt(
+				Math.pow(e.clientX - btnCenterX, 2) + 
+				Math.pow(e.clientY - btnCenterY, 2)
+			);
+
+			// Si el mouse está cerca (menos de 150px)
+			if (distance < 150) {
+				const containerRect = buttonsContainer.getBoundingClientRect();
+				
+				// Generar nueva posición aleatoria dentro del contenedor
+				const maxX = window.innerWidth - rect.width - 40;
+				const maxY = window.innerHeight - rect.height - 40;
+				
+				const newX = Math.random() * maxX;
+				const newY = Math.random() * maxY;
+				
+				noBtn.style.position = 'fixed';
+				noBtn.style.left = newX + 'px';
+				noBtn.style.top = newY + 'px';
+				noBtn.style.transition = 'all 0.3s ease';
+			}
+		}
+
+		// Agregar evento de movimiento del mouse
+		document.addEventListener('mousemove', moveNoButton);
+
+		// También mover el botón cuando se intenta hacer click
+		noBtn.addEventListener('click', (e) => {
+			e.preventDefault();
+			moveNoButton(e as any);
+		});
+
+		// Botón "Sí"
+		yesBtn.addEventListener('click', () => {
+			successMessage.classList.remove('hidden');
+			buttonsContainer.style.display = 'none';
+			
+			// Confeti usando emojis
+			createConfetti();
+		});
+
+		// Función para crear confeti
+		function createConfetti() {
+			const confettiEmojis = ['💕', '💖', '💝', '❤️', '💗', '💓', '💞', '🎉', '✨', '⭐'];
+			
+			for (let i = 0; i < 50; i++) {
+				const confetti = document.createElement('div');
+				confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+				confetti.style.position = 'fixed';
+				confetti.style.left = Math.random() * 100 + '%';
+				confetti.style.top = '-50px';
+				confetti.style.fontSize = (Math.random() * 20 + 20) + 'px';
+				confetti.style.zIndex = '9999';
+				confetti.style.pointerEvents = 'none';
+				confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+				
+				document.body.appendChild(confetti);
+				
+				setTimeout(() => confetti.remove(), 5000);
+			}
+		}
+
+		// Agregar animación de caída
+		const style = document.createElement('style');
+		style.textContent = `
+			@keyframes fall {
+				to {
+					transform: translateY(100vh) rotate(360deg);
+					opacity: 0;
+				}
+			}
+		`;
+		document.head.appendChild(style);
+
+		// Modal del regalo
+		giftBtn.addEventListener('click', () => {
+			giftModal.classList.remove('hidden');
+		});
+
+		closeModal.addEventListener('click', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			giftModal.classList.add('hidden');
+		});
+
+		giftModal.addEventListener('click', (e) => {
+			if (e.target === giftModal) {
+				giftModal.classList.add('hidden');
+			}
+		});
+	</script>
+</body>
+</html>
