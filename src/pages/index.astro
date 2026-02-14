@@ -1,10 +1,11 @@
 ---
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>💝 ¿Quieres ser mi San Valentín? 💝</title>
@@ -72,7 +73,7 @@
 			
 			<!-- Sección de foto -->
 			<div class="photo-frame">
-			<img src="/juntos.jpeg" alt="Nuestra foto" class="couple-photo" />
+			<img src={`${baseUrl}juntos.jpeg`} alt="Nuestra foto" class="couple-photo" />
 			<div class="photo-placeholder">
 				<span>📸</span>
 				<p>Coloca tu foto aquí<br/>(public/juntos.jpeg)</p>
@@ -118,7 +119,7 @@
 					<button id="close-modal" class="close-btn">✕</button>
 					<h3 class="modal-title">🎁 Tu Regalo Especial 🎁</h3>
 					<div class="gift-image-container">
-					<img src="/gift.PNG" alt="Tu regalo" class="gift-image" />
+					<img src={`${baseUrl}gift.PNG`} alt="Tu regalo" class="gift-image" />
 					
 				</div>
 				<p class="gift-message">¡Espero que te guste! 💝</p>
@@ -268,7 +269,7 @@
 				line-height: 1.6;
 			}
 
-			.couple-photo[src="/juntos.jpeg"] ~ .photo-placeholder {
+			.couple-photo[src*="juntos.jpeg"] ~ .photo-placeholder {
 				display: none;
 			}
 
@@ -698,8 +699,8 @@
 				line-height: 1.6;
 			}
 
-			.gift-image:not([src=""]):not([src*="gift.jpg"]) ~ .gift-placeholder,
-			.gift-image[src*="gift.jpg"]:not([src="/gift.jpg"]) ~ .gift-placeholder {
+			.gift-image[src*="gift.PNG"] ~ .gift-placeholder,
+			.gift-image[src*="gift.jpg"] ~ .gift-placeholder {
 				display: none;
 			}
 
